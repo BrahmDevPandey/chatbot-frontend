@@ -5,7 +5,7 @@ import { useRef, useEffect } from "react";
 
 function App() {
   const [text, setText] = useState("");
-  const BOT_URL = "https://python-chatbot-eight.vercel.app/bot";
+  const BOT_URL = "https://python-chatbot-nine.vercel.app/bot";
   const messageRef = useRef();
 
   let initialChats = [];

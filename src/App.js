@@ -5,7 +5,8 @@ import { useRef, useEffect } from "react";
 
 function App() {
   const [text, setText] = useState("");
-  const BOT_URL = "https://python-chatbot-nine.vercel.app/bot";
+  // const BOT_URL = "https://python-chatbot-nine.vercel.app/bot";
+  const BOT_URL = "http://localhost:9000";
   const messageRef = useRef();
 
   let initialChats = [];
@@ -27,6 +28,7 @@ function App() {
   };
 
   const sendMessage = () => {
+    if (text === "") return;
     const newChats = [
       ...chats,
       {
@@ -42,20 +44,26 @@ function App() {
   };
 
   const getResponse = async (msg, newChats) => {
-    var bodyFormData = new FormData();
-    bodyFormData.append("query", msg);
+    var bodyFormData = { query: msg };
     const response = axios.post(BOT_URL, bodyFormData);
+    var messages = [];
     response
       .then((res) => {
-        setChats([
-          ...newChats,
-          {
-            id: 12,
-            type: "reply",
-            time: new Date(),
-            text: res.data.response,
-          },
-        ]);
+        console.log(res);
+        messages = [];
+        res.data.map(
+          (data) =>
+            (messages = [
+              ...messages,
+              {
+                id: 12,
+                type: "reply",
+                time: new Date(),
+                text: data.text,
+              },
+            ])
+        );
+        setChats([...newChats, ...messages]);
       })
       .catch((error) => console.log("Error in response: " + error));
   };

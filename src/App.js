@@ -6,7 +6,8 @@ import { useRef, useEffect } from "react";
 function App() {
   const [text, setText] = useState("");
   // const BOT_URL = "https://python-chatbot-nine.vercel.app/bot";
-  const BOT_URL = "http://localhost:9000";
+  const BOT_URL =
+    "https://rasa-server-brahmdevpandey.cloud.okteto.net/webhooks/rest/webhook";
   const messageRef = useRef();
 
   let initialChats = [];
@@ -44,7 +45,7 @@ function App() {
   };
 
   const getResponse = async (msg, newChats) => {
-    var bodyFormData = { query: msg };
+    var bodyFormData = { message: msg };
     const response = axios.post(BOT_URL, bodyFormData);
     var messages = [];
     response

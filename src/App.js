@@ -5,9 +5,7 @@ import { useRef, useEffect } from "react";
 
 function App() {
   const [text, setText] = useState("");
-  // const BOT_URL = "https://python-chatbot-nine.vercel.app/bot";
-  const BOT_URL =
-    "https://rasa-server-brahmdevpandey.cloud.okteto.net/webhooks/rest/webhook";
+  const BOT_URL = "http://localhost:5005/webhooks/rest/webhook";
   const messageRef = useRef();
 
   let initialChats = [];
